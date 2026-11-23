@@ -71,9 +71,18 @@ python atractor.py
 
 Abre http://127.0.0.1:8050. Para entrenar sin interfaz basta `python -m pip install -e '.[eeg]'`.
 
-**El visor** permite seleccionar varios canales, un retardo fijo y de 2 a 12 dimensiones por canal. El color indica tiempo. Cada ventana se proyecta con su propio PCA, así que los ejes **no son comparables entre figuras**.
+Hay dos interfaces:
 
-La pestaña **Probabilidad de despertar** abre los CSV de probabilidades generados por la línea de comandos. El entrenamiento se ejecuta con comandos, no dentro de la interfaz.
+| | Qué hace |
+|---|---|
+| `python atractor.py` → puerto **8050** | **Dashboard de análisis de un canal:** señal en el tiempo, atractor 3D, densidad espectral, distribución por bandas, métricas de calidad y búsqueda automática de $\tau$ y dimensión. |
+| `python forecast_viewer.py` → puerto **8051** | **Explorador multicanal y pronóstico:** varios canales a la vez, retardo fijo y de 2 a 12 dimensiones por canal, AMI, falsos vecinos, y la pestaña **Probabilidad de despertar**, que abre los CSV generados por la línea de comandos. |
+
+<p align="center">
+  <img src="assets/screenshot.png" width="100%" alt="Dashboard de atractor.py: señal, atractor 3D, espectro y métricas">
+</p>
+
+En el explorador multicanal, el color indica tiempo y cada ventana se proyecta con su propio PCA, así que los ejes **no son comparables entre figuras**. El entrenamiento se ejecuta con comandos, no dentro de la interfaz.
 
 ## Demostración completa
 
@@ -219,7 +228,8 @@ awakening/
   dataset.py                 ventanas, procedencia y censura del final del registro
   model.py, evaluation.py    entrenamiento, umbrales, métricas y comparación
   cli.py, demo.py            comandos y ejemplo sintético
-atractor.py                  visor interactivo (Dash)
+atractor.py                  dashboard de análisis de un canal (Dash)
+forecast_viewer.py           explorador multicanal y visor de probabilidades (Dash)
 lorenz.py                    demostración interactiva de Takens con Lorenz
 scripts/make_figures.py      genera las figuras de este README
 tests/                       causalidad, sincronización, eventos, particiones, inferencia y visor
@@ -228,4 +238,4 @@ docs/                        métodos, validación y figuras
 
 **Documentación:** [métodos y limitaciones](docs/METHODS.md) · [validación realizada](docs/VALIDATION.md).
 
-`technical_report.pdf`, `slides(ES).pdf` y `assets/screenshot.png` describen una versión anterior del proyecto y no documentan este protocolo.
+`technical_report.pdf` y `slides(ES).pdf` describen la etapa anterior del proyecto, centrada en el dashboard; no documentan el protocolo de pronóstico.

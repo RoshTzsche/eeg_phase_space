@@ -7,7 +7,7 @@ import pytest
 from awakening.io import Recording
 
 pytest.importorskip("dash")
-spec = importlib.util.spec_from_file_location("dashboard", Path(__file__).parents[1]/"atractor.py")
+spec = importlib.util.spec_from_file_location("dashboard", Path(__file__).parents[1]/"forecast_viewer.py")
 dashboard = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(dashboard)
 
@@ -40,3 +40,14 @@ def test_forecast_viewer_handles_predict_csv():
     rows, _, selected, status = dashboard.upload_forecast("data:text/csv;base64,"+base64.b64encode(text).decode())
     assert not status.startswith("Error")
     assert len(dashboard.forecast_figure(selected, rows).data) == 2
+
+
+def test_original_dashboard_serves_its_layout():
+    pytest.importorskip("dash_bootstrap_components")
+    spec_old = importlib.util.spec_from_file_location("atractor", Path(__file__).parents[1]/"atractor.py")
+    original = importlib.util.module_from_spec(spec_old)
+    spec_old.loader.exec_module(original)
+    client = original.app.server.test_client()
+    assert client.get("/").status_code == 200
+    assert client.get("/_dash-layout").status_code == 200
+    assert client.get("/_dash-dependencies").status_code == 200
