@@ -70,12 +70,12 @@ El tiempo en alerta es la duración de los intervalos objetivo dentro de la uni�
 
 El umbral se elige entre 0..1 en pasos .01 y un umbral mayor que 1 (no emitir). Entre opciones que cumplen el presupuesto de falsas alarmas en validación se maximiza sensibilidad, luego se minimizan falsas alarmas y tiempo en alerta. El test utiliza el mismo umbral bloqueado. No hay garantía de mantener el presupuesto en una nueva población.
 
-Se reportan intervalos bootstrap percentiles por sujeto y una comparación pareada de diferencia de sensibilidad joint-spectral. No son una corrección de múltiples comparaciones ni un test confirmatorio por sí solos. Con un solo sujeto no se presenta intervalo; con pocos sujetos puede ser poco informativo. Average precision y ROC-AUC son undefined si solo hay una clase. Sensibilidad es undefined si no hay eventos evaluables.
+Se reportan intervalos bootstrap percentiles por sujeto y una comparación pareada de diferencia de sensibilidad joint-spectral. No son una corrección de múltiples comparaciones ni un test confirmatorio por sí solos. Con un solo sujeto no se presenta intervalo; con pocos sujetos puede ser poco informativo. Average precision y ROC-AUC quedan indefinidas si solo hay una clase. La sensibilidad queda indefinida si no hay eventos evaluables.
 
 ## Próximo experimento real
 
 1. Reunir PSG e hipnogramas de múltiples sujetos, registrar población, medicación y montaje.
-2. Comprobar sincronización, unidades, referencia y calidad. No mezclar cohorts sin documentarlo.
+2. Comprobar sincronización, unidades, referencia y calidad. No mezclar cohortes sin documentarlo.
 3. Fijar particiones, filtros y evento antes de explorar resultados de prueba.
 4. Ejecutar la comparación espectral/individual/conjunta, inspeccionar artefactos y falsas alarmas.
 5. Repetir en otra cohorte o dataset para estudiar generalización.
